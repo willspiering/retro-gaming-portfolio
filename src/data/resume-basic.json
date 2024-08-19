@@ -1,0 +1,182 @@
+{
+    "personal_info": {
+      "name": "Will Spiering",
+      "headline": "Senior UX/UI Engineer | Front-End Developer | User Experience Expert | Design-Dev Diplomat",
+      "contact": {
+        "email": "willspiering@gmail.com",
+        "linkedin": "http://linkedin.com/in/willspiering",
+        "github": "https://github.com/willspiering",
+        "twitter": "http://twitter.com/willspiering"
+      },
+      "location": "Remote",
+      "summary": {
+        "paragraph": "Senior UX/UI Engineer and Front-End Developer with a proven track record in creating intuitive, responsive, and user-centric digital experiences. Expertise in bridging the gap between design and development, leveraging a diverse skill set including React, TypeScript, and SharePoint Framework. Proficient in working with and implementing various design systems, ensuring consistency and efficiency across projects. Demonstrated ability to lead projects from concept to completion, with a focus on enhancing user engagement and streamlining workflows. Highly adept at problem-solving, quick learning, and adapting to new technologies to drive innovation in web and application development.",
+        "bulleted": [
+          "Senior UX/UI Engineer specializing in creating intuitive and responsive digital experiences",
+          "Expert in bridging design and development using React, TypeScript, and SharePoint Framework",
+          "Proficient in implementing and working with various design systems",
+          "Proven track record in leading projects from concept to completion",
+          "Strong focus on enhancing user engagement and streamlining workflows",
+          "Highly skilled in problem-solving and quick adaptation to new technologies",
+          "Passionate about driving innovation in web and application development"
+        ]
+      }
+    },
+    "experience": [
+      {
+        "job_title": "Senior Software Engineer - UX/UI",
+        "company": "Optomi",
+        "location": "Remote",
+        "start_date": "May 2022",
+        "end_date": "Present",
+        "description": {
+          "paragraph": "Led the creation of an innovative SharePoint landing page tailored to individual user job roles. Developed UI for SharePoint Framework Web Parts using React, TypeScript, and Styled Components to boost user efficiency. Created a unified component library combining Microsoft Office design elements with brand identity to standardize development and maintain consistency in applications.",
+          "bulleted": [
+            "Led the creation of an innovative SharePoint landing page tailored to individual user job roles",
+            "Developed UI for SharePoint Framework Web Parts using React, TypeScript, and Styled Components",
+            "Created a unified component library combining Microsoft Office design elements with brand identity",
+            "Improved user experiences across office productivity apps, leading to increased efficiency and satisfaction"
+          ]
+        },
+        "skills": ["React", "CSS", "TypeScript", "JavaScript", "Figma", "Whimsical", "Git"]
+      },
+      {
+        "job_title": "UX/UI Developer",
+        "company": "Intellective",
+        "location": "Remote",
+        "start_date": "September 2021",
+        "end_date": "May 2022",
+        "description": {
+          "paragraph": "Redesigned forms and optimized user flows to enhance the user experience for applications tracking permits and government documents. Created intuitive wireframes and interactive prototypes using Figma, improving usability and efficiency. Collaborated with the development team to integrate design elements seamlessly, supporting front-end development tasks and maintaining design integrity.",
+          "bulleted": [
+            "Redesigned forms and optimized user flows for applications tracking permits and government documents",
+            "Created intuitive wireframes and interactive prototypes using Figma",
+            "Collaborated with the development team to integrate design elements seamlessly"
+          ]
+        },
+        "skills": ["React", "CSS", "TypeScript", "Figma", "Whimsical"]
+      },
+      {
+        "job_title": "Software Engineer",
+        "company": "Core BTS",
+        "location": "Remote",
+        "start_date": "August 2018",
+        "end_date": "August 2021",
+        "description": {
+          "paragraph": "Led UX/UI design and development for custom SharePoint, Teams, and Office 365 enhancements. Created high-fidelity mockups using Figma to simplify complex requirements into user-friendly interfaces. Developed robust SharePoint web parts with React, Styled Components, and the SharePoint Framework for seamless system integration. Ensured optimal user experience by implementing responsive design principles across devices and platforms.",
+          "bulleted": [
+            "Led UX/UI design and development for custom SharePoint, Teams, and Office 365 enhancements",
+            "Created high-fidelity mockups using Figma to simplify complex requirements into user-friendly interfaces",
+            "Developed robust SharePoint web parts with React, Styled Components, and the SharePoint Framework",
+            "Ensured optimal user experience by implementing responsive design principles across devices and platforms"
+          ]
+        },
+        "skills": ["React", "CSS", "TypeScript", "HTML", "JavaScript", "Figma", "Whimsical"]
+      },
+      {
+        "job_title": "Front-End Developer",
+        "company": "Standard Process",
+        "location": "Palmyra, WI",
+        "start_date": "November 2017",
+        "end_date": "March 2018",
+        "description": {
+          "paragraph": "Enhanced and maintained a large-scale e-commerce platform with Kentico CMS. Developed responsive pages using Bootstrap, custom forms, and advanced functionality in HTML, CSS, JavaScript, and C#. Optimized customer journey and enhanced conversion rates through intuitive design for seamless user experiences.",
+          "bulleted": [
+            "Enhanced and maintained a large-scale e-commerce platform with Kentico CMS",
+            "Developed responsive pages using Bootstrap, custom forms, and advanced functionality",
+            "Optimized customer journey and enhanced conversion rates through intuitive design"
+          ]
+        },
+        "skills": ["CSS", "HTML", "JavaScript", "C#", "jQuery", "Bootstrap"]
+      },
+      {
+        "job_title": "Front-End Web Developer",
+        "company": "iNET Web",
+        "location": "Waukesha, WI",
+        "start_date": "May 2017",
+        "end_date": "October 2017",
+        "description": {
+          "paragraph": "Expert in converting detailed Photoshop mockups into fully operational websites using an exclusive CMS. Utilized C# to craft dynamic, responsive websites following contemporary web standards and best practices. Proven track record of meticulously translating design ideas into flawless executions, guaranteeing client approval and maintaining brand coherence online.",
+          "bulleted": [
+            "Converted detailed Photoshop mockups into fully operational websites using an exclusive CMS",
+            "Utilized C# to craft dynamic, responsive websites following contemporary web standards",
+            "Meticulously translated design ideas into flawless executions, maintaining brand coherence online"
+          ]
+        },
+        "skills": ["CSS", "HTML", "JavaScript", "Photoshop", "C#"]
+      },
+      {
+        "job_title": "Web Designer/Developer",
+        "company": "Beyond Private Label",
+        "location": "Pewaukee, WI",
+        "start_date": "January 2016",
+        "end_date": "May 2017",
+        "description": {
+          "paragraph": "Developed responsive websites using Bootstrap and WordPress to meet client requirements. Designed user-friendly interfaces that blended aesthetics with functionality. Performed thorough testing for cross-browser compatibility, enhancing client satisfaction and engagement.",
+          "bulleted": [
+            "Developed responsive websites using Bootstrap and WordPress",
+            "Designed user-friendly interfaces blending aesthetics with functionality",
+            "Performed thorough testing for cross-browser compatibility"
+          ]
+        },
+        "skills": ["PHP", "CSS", "HTML", "JavaScript", "jQuery", "Photoshop", "WordPress", "Bootstrap"]
+      },
+      {
+        "job_title": "Web & App Developer",
+        "company": "Triad Creative Group",
+        "location": "Brookfield, WI",
+        "start_date": "May 2015",
+        "end_date": "December 2015",
+        "description": {
+          "paragraph": "Spearheaded the creation and maintenance of mobile-friendly, responsive websites for both the company and its diverse client base. Specialized in developing interactive, immersive experiences for trade show and museum exhibits, pushing the boundaries of digital engagement. Demonstrated versatility in adapting to various project requirements, consistently delivering high-quality, user-focused digital solutions.",
+          "bulleted": [
+            "Created and maintained mobile-friendly, responsive websites for the company and clients",
+            "Developed interactive, immersive experiences for trade show and museum exhibits",
+            "Adapted to various project requirements, delivering high-quality, user-focused digital solutions"
+          ]
+        },
+        "skills": ["PHP", "CSS", "HTML", "JavaScript", "jQuery", "Photoshop", "WordPress", "Ionic"]
+      }
+    ],
+    "education": [
+      {
+        "degree": "Associate's Degree",
+        "field": "Web & Software Development",
+        "school": "Lakeshore Technical College",
+        "start_date": "August 2013",
+        "end_date": "May 2015"
+      },
+      {
+        "degree": "Associate's Degree",
+        "field": "Criminal Justice - Law Enforcement",
+        "school": "Lakeshore Technical College",
+        "start_date": "August 2010",
+        "end_date": "May 2012"
+      }
+    ],
+    "skills": [
+      "React",
+      "CSS",
+      "TypeScript",
+      "JavaScript",
+      "Figma",
+      "Whimsical",
+      "Git",
+      "HTML",
+      "C#",
+      "jQuery",
+      "Bootstrap",
+      "PHP",
+      "WordPress",
+      "Photoshop",
+      "Ionic",
+      "SharePoint Framework",
+      "Styled Components",
+      "Office 365",
+      "Kentico CMS",
+      "Responsive Design",
+      "UX/UI Design",
+      "Cross-browser Compatibility"
+    ]
+  }
+  

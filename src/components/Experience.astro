@@ -1,37 +1,35 @@
 ---
-// src/components/Experience.astro
+interface Props {
+  experience: {
+    job_title: string;
+    company: string;
+    location: string;
+    start_date: string;
+    end_date: string;
+    description: {
+      paragraph: string;
+      bulleted: string[];
+    };
+    skills: string[];
+  }[];
+}
 
-const experiences = [
-  {
-    title: "Senior Software Engineer - UX/UI",
-    company: "Optomi",
-    location: "Remote",
-    period: "May 2022 - Present",
-    responsibilities: [
-      "Led the creation of an innovative SharePoint landing page tailored to individual user job roles",
-      "Developed UI for SharePoint Framework Web Parts using React, TypeScript, and Styled Components",
-      "Created a unified component library combining Microsoft Office design elements with brand identity",
-      "Improved user experiences across office productivity apps, leading to increased efficiency and satisfaction"
-    ],
-    skills: ["React", "CSS", "TypeScript", "JavaScript", "Figma", "Whimsical", "Git"]
-  },
-  // Add more experiences here
-];
+const { experience } = Astro.props;
 ---
 
 <section class="section pixel-border">
   <div class="section-title">
     <h2>Experience</h2>
   </div>
-  {experiences.map((job) => (
+  {experience.map((job) => (
     <div class="experience-item">
-      <h3 class="job-title">{job.title}</h3>
+      <h3 class="job-title">{job.job_title}</h3>
       <div class="experience-item-header">
         <span class="company-name">{job.company}</span>
-        <div class="job-details">{job.location} | {job.period}</div>
+        <div class="job-details">{`${job.location} | ${job.start_date} - ${job.end_date}`}</div>
       </div>
       <ul>
-        {job.responsibilities.map((responsibility) => (
+        {job.description.bulleted.map((responsibility) => (
           <li>{responsibility}</li>
         ))}
       </ul>

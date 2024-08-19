@@ -1,31 +1,18 @@
 ---
-const skills = [
-  { name: "React", level: 90 },
-  { name: "TypeScript", level: 85 },
-  { name: "CSS", level: 95 },
-  // Add more skills as needed
-];
+interface Props {
+  skills: string[];
+}
 
-const tags = ["React", "CSS", "TypeScript", "UX/UI Design", "HTML", "JavaScript", "Git", "SharePoint", "Office 365"];
+const { skills } = Astro.props;
 ---
 
 <section class="section pixel-border">
   <div class="section-title">
     <h2>Skills</h2>
   </div>
-  <!-- <div class="skills-list">
-    {skills.map((skill) => (
-      <div class="skill">
-        <span class="skill-name">{skill.name}</span>
-        <div class="progress-bar">
-          <div class="progress" style={`width: ${skill.level}%`}></div>
-        </div>
-      </div>
-    ))}
-  </div> -->
   <div class="skill-tags">
-    {tags.map((tag) => (
-      <span class="skill-tag">{tag}</span>
+    {skills.map(skill => (
+      <span class="skill-tag">{skill}</span>
     ))}
   </div>
 </section>

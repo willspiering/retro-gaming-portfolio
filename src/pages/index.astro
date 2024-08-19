@@ -5,19 +5,24 @@ import Sidebar from '../components/Sidebar.astro';
 import Summary from '../components/Summary.astro';
 import Experience from '../components/Experience.astro';
 import ProjectShowcase from '../components/ProjectShowcase.astro';
+
+import resumeData from '../data/resume-basic.json';
+
+const {personal_info, experience, education, skills} = resumeData;
 ---
 
-<Layout title="Will Spiering - UX/UI Developer Portfolio">
-  <Header />
+<Layout title={`${personal_info.name} - UX/UI Developer Portfolio`}>
+  <Header name={personal_info.name} title={personal_info.headline} contact={personal_info.contact} />
   <div class="container">
     <div class="top-section">
-      <Sidebar />
+      <Sidebar skills={skills} education={education} />
       <main class="main-content">
-        <Summary />
-        <Experience />
+        <Summary summary={personal_info.summary.paragraph} />
+        <Experience experience={experience} />
       </main>
     </div>
-    <ProjectShowcase />
+    <!-- TODO: add projects={[]} either from json resume or create separately -->
+    <ProjectShowcase/>
   </div>
 </Layout>
 

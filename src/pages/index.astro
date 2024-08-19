@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import GameNavigation from '../components/GameNavigation.astro';
 import Header from '../components/Header.astro';
 import Sidebar from '../components/Sidebar.astro';
 import Summary from '../components/Summary.astro';
@@ -13,6 +14,7 @@ const {personal_info, experience, education, skills} = resumeData;
 
 <Layout title={`${personal_info.name} - UX/UI Developer Portfolio`}>
   <Header name={personal_info.name} title={personal_info.headline} contact={personal_info.contact} />
+  <GameNavigation/>
   <div class="container">
     <div class="top-section">
       <Sidebar skills={skills} education={education} />

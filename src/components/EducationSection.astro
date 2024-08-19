@@ -1,0 +1,47 @@
+---
+const educationItems = [
+  {
+    degree: "Web & Software Development",
+    school: "Lakeshore Technical College",
+    period: "2013 - 2015"
+  },
+  {
+    degree: "Criminal Justice - Law Enforcement",
+    school: "Lakeshore Technical College",
+    period: "2010 - 2012"
+  }
+];
+---
+
+<section class="section pixel-border">
+  <div class="section-title">
+    <h2>Education</h2>
+  </div>
+  {educationItems.map((item) => (
+    <div class="education-item">
+      <h3 class="degree">{item.degree}</h3>
+      <p>
+        <strong>{item.school}</strong><br />
+        Associate's Degree | {item.period}
+      </p>
+    </div>
+  ))}
+</section>
+
+<style>
+  .education-item {
+    margin-bottom: 20px;
+  }
+
+  .degree {
+    font-family: 'Press Start 2P', cursive;
+    color: var(--highlight-color);
+    font-size: 0.9em;
+    margin-bottom: 5px;
+  }
+
+  .education-item p {
+    font-size: 0.9em;
+    margin: 0;
+  }
+</style>

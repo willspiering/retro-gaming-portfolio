@@ -1,0 +1,99 @@
+---
+// src/components/Header.astro
+import ThemeSwitcher from './ThemeSwitcher.astro';
+---
+
+<header class="header pixel-border">
+  <h1>Will Spiering</h1>
+  <p class="title">Senior UX/UI Engineer | Front-End Developer | User Experience Expert | Design-Dev Diplomat</p>
+  <ThemeSwitcher />
+  <div class="contact-info">
+    <a href="mailto:willspiering@gmail.com">willspiering@gmail.com</a>
+    <a href="http://linkedin.com/in/willspiering" target="_blank">LinkedIn</a>
+    <a href="https://github.com/willspiering" target="_blank">GitHub</a>
+    <a href="http://twitter.com/willspiering" target="_blank">Twitter</a>
+  </div>
+</header>
+
+<style>
+  .header {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: var(--header-bg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: repeating-linear-gradient(
+      to right,
+      var(--highlight-color),
+      var(--highlight-color) 10px,
+      var(--secondary-color) 10px,
+      var(--secondary-color) 20px
+    );
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 2.5em;
+    color: var(--highlight-color);
+    text-shadow: 2px 2px var(--accent-color);
+  }
+
+  .title {
+    font-family: 'Roboto', sans-serif;
+    margin: 10px 0 0;
+    font-size: 1em;
+    color: var(--secondary-color);
+  }
+
+  .contact-info {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    gap: 10px;
+  }
+
+  .contact-info a {
+    font-family: 'Press Start 2P', cursive;
+    padding: 5px 10px;
+    background-color: var(--accent-color);
+    color: var(--card-bg);
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    font-size: 0.7em;
+    text-decoration: none;
+  }
+
+  .contact-info a:hover {
+    background-color: var(--highlight-color);
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2em;
+    }
+
+    .title {
+      font-size: 0.9em;
+    }
+
+    .contact-info {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .contact-info a {
+      width: 80%;
+      text-align: center;
+    }
+  }
+</style>

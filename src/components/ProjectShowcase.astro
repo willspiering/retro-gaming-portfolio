@@ -1,0 +1,61 @@
+---
+import ProjectCard from './ProjectCard.astro';
+
+const projects = [
+  {
+    title: "SharePoint Dashboard",
+    description: "A customizable dashboard for SharePoint, enhancing user productivity and information accessibility.",
+    imageWidth: 300,
+    imageHeight: 200
+  },
+  {
+    title: "8-bit Portfolio",
+    description: "A responsive, retro-styled portfolio website showcasing web development skills with a unique twist.",
+    imageWidth: 300,
+    imageHeight: 200
+  },
+  {
+    title: "React Component Library",
+    description: "A comprehensive library of reusable React components, streamlining development processes.",
+    imageWidth: 300,
+    imageHeight: 200
+  },
+  {
+    title: "E-commerce UX Redesign",
+    description: "A complete overhaul of an e-commerce platform's user experience, increasing conversions and user satisfaction.",
+    imageWidth: 300,
+    imageHeight: 200
+  }
+];
+---
+
+<section class="section pixel-border full-width-section" id="project-showcase">
+  <div class="section-title">
+    <h2>Project Showcase</h2>
+  </div>
+  <div class="project-grid">
+    {projects.map((project) => (
+      <ProjectCard
+        title={project.title}
+        description={project.description}
+        imageWidth={project.imageWidth}
+        imageHeight={project.imageHeight}
+      />
+    ))}
+  </div>
+</section>
+
+<style>
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .project-grid {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+  }
+</style>

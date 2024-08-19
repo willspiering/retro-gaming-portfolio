@@ -1,0 +1,17 @@
+---
+import SkillsSection from './SkillsSection.astro';
+import EducationSection from './EducationSection.astro';
+---
+
+<aside class="sidebar">
+  <SkillsSection />
+  <EducationSection />
+</aside>
+
+<style>
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Increased to account for the pixel borders */
+  }
+</style>

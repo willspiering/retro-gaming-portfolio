@@ -1,0 +1,76 @@
+---
+const skills = [
+  { name: "React", level: 90 },
+  { name: "TypeScript", level: 85 },
+  { name: "CSS", level: 95 },
+  // Add more skills as needed
+];
+
+const tags = ["React", "CSS", "TypeScript", "UX/UI Design", "HTML", "JavaScript", "Git", "SharePoint", "Office 365"];
+---
+
+<section class="section pixel-border">
+  <div class="section-title">
+    <h2>Skills</h2>
+  </div>
+  <!-- <div class="skills-list">
+    {skills.map((skill) => (
+      <div class="skill">
+        <span class="skill-name">{skill.name}</span>
+        <div class="progress-bar">
+          <div class="progress" style={`width: ${skill.level}%`}></div>
+        </div>
+      </div>
+    ))}
+  </div> -->
+  <div class="skill-tags">
+    {tags.map((tag) => (
+      <span class="skill-tag">{tag}</span>
+    ))}
+  </div>
+</section>
+
+<style>
+  .skills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .skill-name {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8em;
+    color: var(--highlight-color);
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  .progress-bar {
+    height: 20px;
+    background-color: var(--muted-color);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .progress {
+    height: 100%;
+    background-color: var(--highlight-color);
+    transition: width 1s ease-in-out;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .skill-tag {
+    font-family: 'Press Start 2P', cursive;
+    background-color: var(--secondary-color);
+    color: var(--card-bg);
+    padding: 5px 10px;
+    font-size: 0.7em;
+    border-radius: 4px;
+  }
+</style>

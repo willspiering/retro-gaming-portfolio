@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Sidebar from '../components/Sidebar.astro';
+import Summary from '../components/Summary.astro';
+import Experience from '../components/Experience.astro';
+import ProjectShowcase from '../components/ProjectShowcase.astro';
+---
+
+<Layout title="Will Spiering - UX/UI Developer Portfolio">
+  <Header />
+  <div class="container">
+    <div class="top-section">
+      <Sidebar />
+      <main class="main-content">
+        <Summary />
+        <Experience />
+      </main>
+    </div>
+    <ProjectShowcase />
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .top-section {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 40px; /* Increased from 30px to account for borders */
+    margin-bottom: 40px;
+  }
+
+  @media (max-width: 768px) {
+    .top-section {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

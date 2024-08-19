@@ -1,11 +1,12 @@
 ---
+// src/components/ThemeSwitcher.astro
 import { themes } from '../themes';
 ---
 
 <div class="theme-switcher">
   <select id="theme-select">
     {themes.map(theme => (
-      <option value={theme.name}>{theme.name}</option>
+      <option value={theme.name}>{theme.displayName}</option>
     ))}
   </select>
 </div>
@@ -36,6 +37,8 @@ import { themes } from '../themes';
 </style>
 
 <script>
+  import { getThemeByName } from '../themes';
+
   const themeSelect = document.getElementById('theme-select') as HTMLSelectElement;
 
   // Set initial value

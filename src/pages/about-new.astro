@@ -1,0 +1,81 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import GameNavigation from '../components/GameNavigation.astro';
+import { Button, Card, Tag, Link } from '../components/retro-astro-ui';
+
+import resumeData from '../data/resume-basic.json';
+
+const { personal_info, experience, education, skills } = resumeData;
+---
+
+<Layout title={`${personal_info.name} - About Me`}>
+  <Header name={personal_info.name} title={personal_info.headline} contact={personal_info.contact} />
+  <GameNavigation />
+  
+  <div class="container">
+    <Card title="Summary">
+      <p>{personal_info.summary.paragraph}</p>
+    </Card>
+
+    <Card title="Skills">
+      <div class="skill-tags">
+        {skills.map(skill => (
+          <Tag>{skill}</Tag>
+        ))}
+      </div>
+    </Card>
+
+    <Card title="Experience">
+      {experience.map((job) => (
+        <div class="experience-item">
+          <h3>{job.job_title}</h3>
+          <p>{job.company} | {job.location}</p>
+          <p>{job.start_date} - {job.end_date}</p>
+          <ul>
+            {job.description.bulleted.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+          <div class="job-skills">
+            {job.skills.map((skill) => (
+              <Tag>{skill}</Tag>
+            ))}
+          </div>
+        </div>
+      ))}
+    </Card>
+
+    <Card title="Education">
+      {education.map((edu) => (
+        <div class="education-item">
+          <h3>{edu.field}</h3>
+          <p>{edu.school}</p>
+          <p>{edu.degree} | {edu.start_date} - {edu.end_date}</p>
+        </div>
+      ))}
+    </Card>
+
+    <Card title="Projects">
+      {/* Add your projects here */}
+    </Card>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .skill-tags, .job-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .experience-item, .education-item {
+    margin-bottom: 20px;
+  }
+</style>

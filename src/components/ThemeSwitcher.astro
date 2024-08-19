@@ -3,6 +3,7 @@
 import { themes } from '../themes';
 ---
 
+
 <div class="theme-switcher">
   <button id="theme-switcher-button" class="theme-switcher-button pixel-button">
     Change Theme
@@ -119,11 +120,12 @@ import { themes } from '../themes';
     transition: all 0.2s ease;
     padding: 10px;
     border: 2px solid transparent;
+    position: relative;
+    border-radius: 8px;
   }
 
   .theme-card:hover, .theme-card:focus {
     background-color: var(--secondary-color);
-    border-color: var(--highlight-color);
     outline: none;
   }
 
@@ -134,6 +136,45 @@ import { themes } from '../themes';
     overflow: hidden;
     background-color: var(--preview-bg);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--border-color);
+    transition: all 0.2s ease;
+  }
+
+  .theme-card.active {
+    background-color: var(--secondary-color);
+  }
+
+  .theme-card.active .theme-preview {
+    border-color: var(--highlight-color);
+    box-shadow: 0 0 0 2px var(--highlight-color), 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .theme-card.active::after {
+    content: '✓';
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: var(--highlight-color);
+    color: var(--bg-color);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 2px solid var(--bg-color);
+  }
+
+  .theme-name {
+    display: block;
+    margin-top: 8px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7em;
+    color: var(--text-color);
+    line-height: 1.4;
   }
 
   .preview-header {
@@ -231,9 +272,10 @@ import { themes } from '../themes';
   const closeModal = document.getElementById('close-modal');
   const closeModalX = document.getElementById('close-modal-x');
   const themeCards = document.querySelectorAll('.theme-card');
+  const themeGrid = document.querySelector('.theme-grid');
 
   // Function to apply theme
-  function applyTheme(themeName) {
+  function applyTheme(themeName: string) {
     const theme = getThemeByName(themeName);
     if (theme) {
       Object.entries(theme.colors).forEach(([key, value]) => {
@@ -241,13 +283,30 @@ import { themes } from '../themes';
       });
       document.body.className = themeName;
       localStorage.setItem('selectedTheme', themeName);
+      updateActiveTheme(themeName);
     }
+  }
+
+  // Function to update active theme indicator
+  function updateActiveTheme(themeName: string) {
+    themeCards.forEach((card) => {
+      if (card instanceof HTMLElement) {
+        if (card.dataset.theme === themeName) {
+          card.classList.add('active');
+        } else {
+          card.classList.remove('active');
+        }
+      }
+    });
   }
 
   // Function to open modal
   function openThemeModal() {
     themeModal?.style.setProperty('display', 'block');
     document.body.style.overflow = 'hidden';
+    if (themeGrid) {
+      themeGrid.scrollTop = 0;
+    }
   }
 
   // Function to close modal
@@ -266,13 +325,15 @@ import { themes } from '../themes';
   closeModalX?.addEventListener('click', closeThemeModal);
 
   themeCards.forEach((card) => {
-    card.addEventListener('click', (e) => {
-      const selectedTheme = (e.currentTarget as HTMLElement).dataset.theme;
-      if (selectedTheme) {
-        applyTheme(selectedTheme);
-        closeThemeModal();
-      }
-    });
+    if (card instanceof HTMLElement) {
+      card.addEventListener('click', (e) => {
+        const selectedTheme = card.dataset.theme;
+        if (selectedTheme) {
+          applyTheme(selectedTheme);
+          closeThemeModal();
+        }
+      });
+    }
   });
 
   // Close the modal if clicking outside of it

@@ -162,17 +162,20 @@ const { title } = Astro.props;
   @media (max-width: 768px) {
     body {
       display: block;
+      overflow-x: hidden;
     }
 
     .page-wrapper {
-      padding: 10px;
+      padding: 0;
       height: auto;
+      min-height: 100vh;
     }
 
     .page-container {
       width: 100%;
       height: auto;
       min-height: 100vh;
+      margin: 0;
       border: none;
       box-shadow: none;
     }
@@ -202,8 +205,10 @@ const { title } = Astro.props;
 
     .main-content {
       width: 100%;
+      min-height: 100vh;
       overflow-y: visible;
-      padding-bottom: 80px; /* Space for mobile menu button */
+      padding: 20px 10px 80px; /* Adjusted padding */
+      box-sizing: border-box;
     }
 
     .close-sidebar {
@@ -229,5 +234,52 @@ const { title } = Astro.props;
 </style>
 
 <script>
-  // ... (script remains the same as in the previous version)
-</script>
+    import { getThemeByName } from '../themes';
+    import { applyPixelatedBackground, initializeBackground } from '../utils/pixelatedBackground';
+  
+    function applyTheme(themeName: string): void {
+      const theme = getThemeByName(themeName);
+      Object.entries(theme.colors).forEach(([key, value]) => {
+        document.documentElement.style.setProperty(`--${key}`, value);
+      });
+      applyPixelatedBackground(theme);
+    }
+  
+    // Apply theme on load
+    const savedTheme = localStorage.getItem('selectedTheme') || 'retroComputer';
+    applyTheme(savedTheme);
+  
+    // Listen for theme change events
+    document.addEventListener('themeChange', (e: Event) => {
+      const customEvent = e as CustomEvent<{ theme: string }>;
+      const newTheme = customEvent.detail.theme;
+      applyTheme(newTheme);
+      localStorage.setItem('selectedTheme', newTheme);
+    });
+  
+    // Initialize the pixelated background
+    initializeBackground();
+  
+    // Mobile menu functionality
+    const closeSidebarButton = document.getElementById('close-sidebar');
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    
+    closeSidebarButton?.addEventListener('click', () => {
+      document.body.classList.remove('sidebar-open');
+      mobileMenuButton?.classList.remove('open');
+      const menuText = mobileMenuButton?.querySelector('.menu-text');
+      if (menuText) {
+        menuText.textContent = 'Menu';
+      }
+    });
+  
+    // Prevent transition on resize
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      document.body.classList.add('resize-transition-stopper');
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        document.body.classList.remove('resize-transition-stopper');
+      }, 400);
+    });
+  </script>

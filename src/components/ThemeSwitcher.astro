@@ -266,13 +266,13 @@ import { themes } from '../themes';
 
 <script>
   import { getThemeByName } from '../themes';
+  import { applyPixelatedBackground, handleThemeChange } from '../utils/pixelatedBackground';
 
   const themeButton = document.getElementById('theme-switcher-button');
   const themeModal = document.getElementById('theme-modal');
   const closeModal = document.getElementById('close-modal');
   const closeModalX = document.getElementById('close-modal-x');
   const themeCards = document.querySelectorAll('.theme-card');
-  const themeGrid = document.querySelector('.theme-grid');
 
   // Function to apply theme
   function applyTheme(themeName: string) {
@@ -283,30 +283,20 @@ import { themes } from '../themes';
       });
       document.body.className = themeName;
       localStorage.setItem('selectedTheme', themeName);
-      updateActiveTheme(themeName);
+      
+      // Directly apply the pixelated background
+      applyPixelatedBackground(theme);
+      
+      // Dispatch the themeChange event
+      const themeChangeEvent = new CustomEvent('themeChange', { detail: { theme: themeName } });
+      document.dispatchEvent(themeChangeEvent);
     }
-  }
-
-  // Function to update active theme indicator
-  function updateActiveTheme(themeName: string) {
-    themeCards.forEach((card) => {
-      if (card instanceof HTMLElement) {
-        if (card.dataset.theme === themeName) {
-          card.classList.add('active');
-        } else {
-          card.classList.remove('active');
-        }
-      }
-    });
   }
 
   // Function to open modal
   function openThemeModal() {
     themeModal?.style.setProperty('display', 'block');
     document.body.style.overflow = 'hidden';
-    if (themeGrid) {
-      themeGrid.scrollTop = 0;
-    }
   }
 
   // Function to close modal
@@ -325,15 +315,13 @@ import { themes } from '../themes';
   closeModalX?.addEventListener('click', closeThemeModal);
 
   themeCards.forEach((card) => {
-    if (card instanceof HTMLElement) {
-      card.addEventListener('click', (e) => {
-        const selectedTheme = card.dataset.theme;
-        if (selectedTheme) {
-          applyTheme(selectedTheme);
-          closeThemeModal();
-        }
-      });
-    }
+    card.addEventListener('click', (e) => {
+      const selectedTheme = (e.currentTarget as HTMLElement).dataset.theme;
+      if (selectedTheme) {
+        applyTheme(selectedTheme);
+        closeThemeModal();
+      }
+    });
   });
 
   // Close the modal if clicking outside of it
@@ -342,4 +330,7 @@ import { themes } from '../themes';
       closeThemeModal();
     }
   });
+
+  // Listen for theme change events
+  document.addEventListener('themeChange', handleThemeChange as EventListener);
 </script>

@@ -1,11 +1,24 @@
 ---
 import SkillsSection from './SkillsSection.astro';
 import EducationSection from './EducationSection.astro';
+
+interface Props {
+  skills: string[];
+  education: {
+    degree: string;
+    field: string;
+    school: string;
+    start_date: string;
+    end_date: string;
+  }[];
+}
+
+const { skills, education } = Astro.props;
 ---
 
 <aside class="sidebar">
-  <SkillsSection />
-  <EducationSection />
+  <SkillsSection skills={skills} />
+  <EducationSection education={education} />
 </aside>
 
 <style>

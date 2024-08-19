@@ -1,28 +1,27 @@
 ---
-const educationItems = [
-  {
-    degree: "Web & Software Development",
-    school: "Lakeshore Technical College",
-    period: "2013 - 2015"
-  },
-  {
-    degree: "Criminal Justice - Law Enforcement",
-    school: "Lakeshore Technical College",
-    period: "2010 - 2012"
-  }
-];
+interface Props {
+  education: {
+    degree: string;
+    field: string;
+    school: string;
+    start_date: string;
+    end_date: string;
+  }[];
+}
+
+const { education } = Astro.props;
 ---
 
-<section class="section pixel-border">
+<section id="education" class="section pixel-border">
   <div class="section-title">
     <h2>Education</h2>
   </div>
-  {educationItems.map((item) => (
+  {education.map((edu) => (
     <div class="education-item">
-      <h3 class="degree">{item.degree}</h3>
+      <h3 class="degree">{edu.field}</h3>
       <p>
-        <strong>{item.school}</strong><br />
-        Associate's Degree | {item.period}
+        <strong>{edu.school}</strong><br />
+        {edu.degree} | {edu.start_date} - {edu.end_date}
       </p>
     </div>
   ))}

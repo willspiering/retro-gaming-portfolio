@@ -1,5 +1,6 @@
 ---
 import { themes } from '../themes';
+import MobileMenuButton from '../components/MobileMenuButton.astro';
 
 export interface Props {
   title: string;
@@ -12,7 +13,7 @@ const { title } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
@@ -21,6 +22,7 @@ const { title } = Astro.props;
 	<body>
 		<div class="page-container pixel-border">
 			<aside class="sidebar">
+				<button id="close-sidebar" class="close-sidebar pixel-border">×</button>
 				<!-- Sidebar content will be added here later -->
 			</aside>
 			<div class="content-divider"></div>
@@ -28,6 +30,7 @@ const { title } = Astro.props;
 				<slot />
 			</main>
 		</div>
+		<MobileMenuButton />
 	</body>
 </html>
 
@@ -51,7 +54,6 @@ const { title } = Astro.props;
 		height: 100%;
 		margin: 0;
 		padding: 0;
-		overflow: hidden;
 	}
 
 	body {
@@ -62,6 +64,7 @@ const { title } = Astro.props;
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		overflow-x: hidden;
 	}
 
 	h1, h2, h3, h4 {
@@ -91,6 +94,7 @@ const { title } = Astro.props;
 		padding: 20px;
 		overflow-y: auto;
 		background-color: var(--sidebar-bg);
+		position: relative;
 	}
 
 	.content-divider {
@@ -111,50 +115,77 @@ const { title } = Astro.props;
 		overflow-y: auto;
 	}
 
-	@media (max-width: 1024px) {
-		.page-container {
-			width: 100%;
-			height: 100%;
-			border: none;
-			box-shadow: none;
-		}
-
-		body {
-			padding: 0;
-		}
-
-		.pixel-border {
-			border: none;
-			box-shadow: none;
-		}
+	.close-sidebar {
+		display: none;
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		background-color: var(--highlight-color);
+		color: var(--bg-color);
+		border: none;
+		width: 30px;
+		height: 30px;
+		font-size: 20px;
+		line-height: 1;
+		cursor: pointer;
+		z-index: 1001;
 	}
 
 	@media (max-width: 768px) {
+		body {
+			display: block;
+			overflow-y: auto;
+		}
+
 		.page-container {
-			flex-direction: column;
+			width: 100%;
+			height: auto;
+			min-height: 100vh;
+			border: none;
+			box-shadow: none;
 		}
 
 		.sidebar {
-			flex: none;
+			position: fixed;
+			top: 0;
+			left: 0;
 			width: 100%;
-			max-height: 30vh;
+			height: 100%;
+			max-width: 100%;
+			z-index: 1000;
+			transform: translateX(-100%);
+			transition: transform 0.3s ease-in-out;
+		}
+
+		body.sidebar-open .sidebar {
+			transform: translateX(0);
 		}
 
 		.content-divider {
-			width: 100%;
-			height: 4px;
-			background: repeating-linear-gradient(
-				to right,
-				var(--border-color),
-				var(--border-color) 4px,
-				transparent 4px,
-				transparent 8px
-			);
+			display: none;
 		}
 
 		.main-content {
 			width: 100%;
+			overflow-y: visible;
+			padding-bottom: 80px; /* Space for mobile menu button */
 		}
+
+		.close-sidebar {
+			display: block;
+		}
+	}
+
+	/* Disable sidebar transition on larger screens */
+	@media (min-width: 769px) {
+		.sidebar {
+			transition: none;
+		}
+	}
+
+	/* Utility class to stop transitions during resize */
+	.resize-transition-stopper * {
+		transition: none !important;
 	}
 </style>
 
@@ -178,5 +209,28 @@ const { title } = Astro.props;
 		const newTheme = customEvent.detail.theme;
 		applyTheme(newTheme);
 		localStorage.setItem('selectedTheme', newTheme);
+	});
+
+	// Mobile menu functionality
+	const closeSidebarButton = document.getElementById('close-sidebar');
+	const mobileMenuButton = document.getElementById('mobile-menu-button');
+	
+	closeSidebarButton?.addEventListener('click', () => {
+		document.body.classList.remove('sidebar-open');
+		mobileMenuButton?.classList.remove('open');
+		const menuText = mobileMenuButton?.querySelector('.menu-text');
+		if (menuText) {
+			menuText.textContent = 'Menu';
+		}
+	});
+
+	// Prevent transition on resize
+	let resizeTimer;
+	window.addEventListener('resize', () => {
+		document.body.classList.add('resize-transition-stopper');
+		clearTimeout(resizeTimer);
+		resizeTimer = setTimeout(() => {
+			document.body.classList.remove('resize-transition-stopper');
+		}, 400);
 	});
 </script>

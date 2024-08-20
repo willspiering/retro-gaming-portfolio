@@ -1,0 +1,55 @@
+---
+const navItems = [
+  { path: '/', label: 'Home' },
+  { path: '/about', label: 'About' },
+  { path: '/projects', label: 'Projects' },
+  { path: '/blog', label: 'Blog' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav class="navigation">
+  {navItems.map((item) => (
+    <a
+      href={item.path}
+      class:list={[
+        'nav-item',
+        { active: currentPath === item.path || (item.path !== '/' && currentPath.startsWith(item.path)) }
+      ]}
+    >
+      {item.label}
+    </a>
+  ))}
+</nav>
+
+<style>
+  .navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-item {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8em;
+    padding: 10px;
+    text-decoration: none;
+    color: var(--text-color);
+    background-color: var(--card-bg);
+    border: 2px solid var(--border-color);
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+
+  .nav-item:hover {
+    background-color: var(--secondary-color);
+    color: var(--bg-color);
+  }
+
+  .nav-item.active {
+    background-color: var(--highlight-color);
+    color: var(--bg-color);
+    border-color: var(--accent-color);
+  }
+</style>

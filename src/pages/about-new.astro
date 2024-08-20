@@ -1,8 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
+import PageHeader from '../components/PageHeader.astro';
 import GameNavigation from '../components/GameNavigation.astro';
 import { Button, Card, Tag, Link } from '../components/retro-astro-ui';
+import ProjectShowcase from '../components/ProjectShowcase.astro';
 
 import resumeData from '../data/resume-basic.json';
 
@@ -10,7 +11,7 @@ const { personal_info, experience, education, skills } = resumeData;
 ---
 
 <Layout title={`${personal_info.name} - About Me`}>
-  <Header name={personal_info.name} title={personal_info.headline} contact={personal_info.contact} />
+  <PageHeader name={personal_info.name} title={personal_info.headline} contact={personal_info.contact} />
   <GameNavigation />
   
   <div class="container">
@@ -58,6 +59,7 @@ const { personal_info, experience, education, skills } = resumeData;
 
     <Card title="Projects">
       {/* Add your projects here */}
+      <ProjectShowcase/>
     </Card>
   </div>
 </Layout>

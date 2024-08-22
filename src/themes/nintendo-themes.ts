@@ -2,36 +2,68 @@ import type { AllThemes } from "../types/theme";
 
 export const nintendoThemes: AllThemes = {
   superMario: {
-    primary: "#e52521",
-    "primary-content": "#ffffff",
-    secondary: "#4ac7fa",
-    "secondary-content": "#ffffff",
-    accent: "#fbd000",
-    "accent-content": "#000000",
-    neutral: "#2c2c2c",
-    "neutral-content": "#ffffff",
-    "base-100": "#ffffff",
-    "base-200": "#f2f2f2",
-    "base-300": "#e5e5e5",
-    "base-content": "#1f2937",
-    info: "#2094f3",
-    "info-content": "#ffffff",
-    success: "#009e49",
-    "success-content": "#ffffff",
-    warning: "#ff9900",
-    "warning-content": "#ffffff",
-    error: "#ff5724",
-    "error-content": "#ffffff",
-    "--rounded-box": "0.25rem",
-    "--rounded-btn": "0.125rem",
-    "--rounded-badge": "0.125rem",
+    primary: "#E52521", // Mario Red
+    "primary-content": "#FFFFFF",
+    secondary: "#FBD000", // Coin Gold
+    "secondary-content": "#000000",
+    accent: "#5C94FC", // Mario's Overall Blue
+    "accent-content": "#FFFFFF",
+    neutral: "#F5D04B", // Question Block Yellow
+    "neutral-content": "#000000",
+    "base-100": "#5C94FC", // Sky Blue
+    "base-200": "#3C6CFC", // Darker Sky Blue
+    "base-300": "#1C44FC", // Even Darker Sky Blue
+    "base-content": "#FFFFFF",
+    info: "#FF6B97", // Peach Pink
+    "info-content": "#000000",
+    success: "#43B047", // 1-Up Mushroom Green
+    "success-content": "#FFFFFF",
+    warning: "#FF9900", // Fire Flower Orange
+    "warning-content": "#000000",
+    error: "#D81F26", // Goomba Brown-Red
+    "error-content": "#FFFFFF",
+    "--rounded-box": "0",
+    "--rounded-btn": "0",
+    "--rounded-badge": "0",
+    "--animation-btn": "0.25s",
+    "--animation-input": "0.2s",
+    "--btn-text-case": "uppercase",
+    "--btn-focus-scale": "0.95",
+    "--border-btn": "4px",
+    "--tab-border": "4px",
+    "--tab-radius": "0",
+  },
+  mario: {
+    primary: "#E52521", // Mario Red
+    "primary-content": "#FFFFFF",
+    secondary: "#FBD000", // Coin Gold
+    "secondary-content": "#000000",
+    accent: "#5C94FC", // Mario's Overall Blue
+    "accent-content": "#FFFFFF",
+    neutral: "#000000", // Black for text and borders
+    "neutral-content": "#FFFFFF",
+    "base-100": "#E52521", // Mario Red as the main background
+    "base-200": "#CE0000", // Darker Mario Red for secondary backgrounds
+    "base-300": "#B50000", // Even darker Mario Red for tertiary backgrounds
+    "base-content": "#FFFFFF",
+    info: "#5C94FC", // Mario's Overall Blue
+    "info-content": "#FFFFFF",
+    success: "#1E8449", // Green from Luigi's hat
+    "success-content": "#FFFFFF",
+    warning: "#FBD000", // Coin Gold
+    "warning-content": "#000000",
+    error: "#E52521", // Mario Red
+    "error-content": "#FFFFFF",
+    "--rounded-box": "0.5rem",
+    "--rounded-btn": "0.25rem",
+    "--rounded-badge": "1.9rem",
     "--animation-btn": "0.25s",
     "--animation-input": "0.2s",
     "--btn-text-case": "uppercase",
     "--btn-focus-scale": "0.95",
     "--border-btn": "2px",
     "--tab-border": "2px",
-    "--tab-radius": "0.25rem",
+    "--tab-radius": "0.5rem",
   },
   legendOfZelda: {
     primary: "#1e8449",

@@ -7,7 +7,7 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" data-theme="superMario">
+<html lang="en" data-theme="metroid">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
@@ -83,3 +83,19 @@ const { title } = Astro.props;
     </div>
   </body>
 </html>
+
+<style is:global>
+  body {
+    font-family: "Roboto", sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: "Press Start 2P", cursive;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+</style>

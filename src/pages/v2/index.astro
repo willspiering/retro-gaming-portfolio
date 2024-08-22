@@ -1,9 +1,129 @@
 ---
+import LayoutV2 from "../../layouts/Layout-v2.astro";
+import resumeData from "../../data/resume-basic.json";
 
+const { personal_info, experience, education, skills } = resumeData;
+
+// TODO: remove this
+const projects = [
+  {
+    title: "SharePoint Dashboard",
+    description:
+      "A customizable dashboard for SharePoint, enhancing user productivity and information accessibility.",
+    imageWidth: 300,
+    imageHeight: 200,
+  },
+  {
+    title: "8-bit Portfolio",
+    description:
+      "A responsive, retro-styled portfolio website showcasing web development skills with a unique twist.",
+    imageWidth: 300,
+    imageHeight: 200,
+  },
+  {
+    title: "React Component Library",
+    description:
+      "A comprehensive library of reusable React components, streamlining development processes.",
+    imageWidth: 300,
+    imageHeight: 200,
+  },
+  {
+    title: "E-commerce UX Redesign",
+    description:
+      "A complete overhaul of an e-commerce platform's user experience, increasing conversions and user satisfaction.",
+    imageWidth: 300,
+    imageHeight: 200,
+  },
+];
 ---
 
-<h1>Coming Soon</h1>
-<h2>v2</h2>
-<a href="/">Home...</a>
-<a href="v2/about">About</a>
-<a href="v2/projects">Projects</a>
+<LayoutV2 title={`${personal_info.name} - ${personal_info.headline}`}>
+  <div class="container mx-auto px-4 py-8">
+    <section class="mb-12">
+      <h1 class="text-4xl font-bold mb-4">{personal_info.name}</h1>
+      <h2 class="text-2xl mb-2">{personal_info.headline}</h2>
+      <p class="text-lg">{personal_info.summary.paragraph}</p>
+    </section>
+
+    <section class="mb-12">
+      <h3 class="text-2xl font-bold mb-4">Skills</h3>
+      <div class="flex flex-wrap gap-2">
+        {
+          skills.map((skill) => (
+            <span class="badge badge-primary">{skill}</span>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h3 class="text-2xl font-bold mb-4">Experience</h3>
+      <div class="space-y-6">
+        {
+          experience.map((job) => (
+            <div class="card bg-base-200 shadow-xl">
+              <div class="card-body">
+                <h4 class="card-title">{job.job_title}</h4>
+                <h5 class="text-lg">{job.company}</h5>
+                <p class="text-sm text-base-content text-opacity-70">
+                  {job.start_date} - {job.end_date}
+                </p>
+                <ul class="list-disc list-inside mt-2">
+                  {job.description.bulleted.map((highlight) => (
+                    <li>{highlight}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h3 class="text-2xl font-bold mb-4">Education</h3>
+      {
+        education.map((edu) => (
+          <div class="card bg-base-200 shadow-xl">
+            <div class="card-body">
+              <h4 class="card-title">
+                {edu.degree} in {edu.field}
+              </h4>
+              <h5 class="text-lg">{edu.school}</h5>
+              <p class="text-sm text-base-content text-opacity-70">
+                Graduated {edu.end_date}
+              </p>
+            </div>
+          </div>
+        ))
+      }
+    </section>
+
+    <section>
+      <h3 class="text-2xl font-bold mb-4">Projects</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {
+          projects.map((project) => (
+            <div class="card bg-base-200 shadow-xl">
+              <figure>
+                <img
+                  src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                  alt="Shoes"
+                />
+              </figure>
+              <div class="card-body">
+                <h4 class="card-title">{project.title}</h4>
+                <p class="mb-2">{project.description}</p>
+                <div class="card-actions justify-end">
+                  <a href="#" class="btn btn-primary">
+                    View Project
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+  </div>
+</LayoutV2>

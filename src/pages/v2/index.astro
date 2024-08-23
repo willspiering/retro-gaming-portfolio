@@ -1,5 +1,5 @@
 ---
-import LayoutV2 from "../../layouts/Layout-v2.astro";
+import LayoutV2 from "../../layouts/LayoutV2.astro";
 import resumeData from "../../data/resume-basic.json";
 import DaisyThemeComponentTester from "../../components/DaisyThemeComponentTester.astro";
 
@@ -45,10 +45,17 @@ const projects = [
       <h2 class="text-2xl mb-2">{personal_info.headline}</h2>
       <p class="text-lg">{personal_info.summary.paragraph}</p>
     </section>
-    <hr />
     <!-- Daisy UI Component Previewer -->
-    <DaisyThemeComponentTester />
-    <hr />
+    <!-- <DaisyThemeComponentTester /> -->
+
+    <section class="mb-12">
+      <div class="card bg-base-200 shadow-xl border-8 border-accent">
+        <div class="card-body">
+          <h2 class="card-title">About Me</h2>
+          <p class="">{personal_info.summary.paragraph}</p>
+        </div>
+      </div>
+    </section>
 
     <section class="mb-12">
       <h3 class="text-2xl font-bold mb-4">Skills</h3>
@@ -58,7 +65,7 @@ const projects = [
           <div class="flex flex-wrap gap-2">
             {
               skills.map((skill) => (
-                <span class="badge badge-primary">{skill}</span>
+                <span class="badge badge-accent">{skill}</span>
               ))
             }
           </div>
@@ -87,25 +94,30 @@ const projects = [
 
     <section class="mb-12">
       <h3 class="text-2xl font-bold mb-4">Experience</h3>
-      <div class="space-y-6">
-        {
-          experience.map((job) => (
-            <div class="card bg-base-200 shadow-xl border-8 border-accent">
-              <div class="card-body">
-                <h4 class="card-title">{job.job_title}</h4>
-                <h5 class="text-lg">{job.company}</h5>
-                <p class="text-sm text-base-content text-opacity-70">
-                  {job.start_date} - {job.end_date}
-                </p>
-                <ul class="list-disc list-inside mt-2">
-                  {job.description.bulleted.map((highlight) => (
-                    <li>{highlight}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))
-        }
+      <div class="card bg-base-200 shadow-xl border-4 border-accent">
+        <div class="card-body">
+          {
+            experience.map((job, index) => (
+              <>
+                <div>
+                  <h4 class="card-title text-secondary">{job.job_title}</h4>
+                  <h5 class="text-lg">{job.company}</h5>
+                  <p class="text-sm text-base-content text-opacity-70">
+                    {job.start_date} - {job.end_date}
+                  </p>
+                  <ul class="list-disc list-inside mt-2">
+                    {job.description.bulleted.map((highlight) => (
+                      <li>{highlight}</li>
+                    ))}
+                  </ul>
+                </div>
+                {index < experience.length - 1 && (
+                  <div class="divider my-4 border-t border-dashed border-accent" />
+                )}
+              </>
+            ))
+          }
+        </div>
       </div>
     </section>
 

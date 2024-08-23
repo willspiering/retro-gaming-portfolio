@@ -76,8 +76,10 @@ const { title } = Astro.props;
       <main class="flex-grow overflow-y-auto h-[calc(100vh-4rem)] lg:h-screen">
         <!-- Page content -->
         <div class="p-4">
-          <!-- Your page content goes here -->
-          <slot />
+          <div class="container mx-auto px-4 py-8">
+            <!-- Your page content goes here -->
+            <slot />
+          </div>
         </div>
       </main>
     </div>
@@ -92,7 +94,9 @@ const { title } = Astro.props;
   h1,
   h2,
   h3,
-  h4 {
+  h4,
+  h5,
+  h6 {
     font-family: "Press Start 2P", cursive;
     font-weight: normal;
     text-transform: uppercase;

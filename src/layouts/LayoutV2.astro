@@ -1,4 +1,6 @@
 ---
+import ThemeSwitcherV2 from "../components/ThemeSwitcherV2.astro";
+
 export interface Props {
   title: string;
 }
@@ -7,7 +9,7 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" data-theme="metroid">
+<html lang="en" data-theme="DarkMatter">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
@@ -51,6 +53,9 @@ const { title } = Astro.props;
           <li><a>Contact</a></li>
         </ul>
       </nav>
+      <div class="mt-4">
+        <!-- <ThemeSwitcherV2 /> -->
+      </div>
     </header>
 
     <div class="flex-grow flex flex-col lg:flex-row">
@@ -70,6 +75,9 @@ const { title } = Astro.props;
             <li><a href="/v2/testing">Testing</a></li>
           </ul>
         </nav>
+        <div class="mt-4">
+          <ThemeSwitcherV2 />
+        </div>
       </aside>
 
       <!-- Main content area -->

@@ -1,0 +1,121 @@
+---
+import { allThemes } from "../themes/index";
+
+const themes = Object.entries(allThemes);
+---
+
+<button
+  id="open-theme-modal"
+  class="btn btn-primary"
+  onclick="theme_modal.showModal()">Change Theme</button
+>
+
+<dialog id="theme_modal" class="modal">
+  <div class="modal-box w-11/12 max-w-5xl">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+        >✕</button
+      >
+    </form>
+    <h3 class="font-bold text-lg mb-4">Choose a Theme</h3>
+    <div
+      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-h-[60vh] overflow-y-auto p-4"
+    >
+      {
+        themes.map(([themeName, theme]) => (
+          <button class="theme-card" data-theme={themeName}>
+            <div class="preview border bg-base-200 rounded-box flex flex-col w-full p-2">
+              <div class="flex flex-col gap-2 items-start">
+                <h3 class="font-bold text-sm">{themeName}</h3>
+                <div class="flex flex-wrap gap-1">
+                  <div class="badge badge-primary">primary</div>
+                  <div class="badge badge-secondary">secondary</div>
+                  <div class="badge badge-accent">accent</div>
+                </div>
+              </div>
+              <div class="flex gap-1 mt-2">
+                <button class="btn btn-primary btn-xs">Button</button>
+                <button class="btn btn-ghost btn-xs">Button</button>
+              </div>
+            </div>
+            <div class="absolute top-0 right-0 mt-1 mr-1 hidden checkmark">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 text-success"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            </div>
+          </button>
+        ))
+      }
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const themeCards = document.querySelectorAll(".theme-card");
+  const modal = document.getElementById("theme_modal") as HTMLDialogElement;
+
+  function updateActiveTheme() {
+    const activeTheme =
+      localStorage.getItem("theme") ||
+      document.documentElement.getAttribute("data-theme");
+    themeCards.forEach((card) => {
+      const checkmark = card.querySelector(".checkmark");
+      if (checkmark) {
+        if (card.getAttribute("data-theme") === activeTheme) {
+          checkmark.classList.remove("hidden");
+        } else {
+          checkmark.classList.add("hidden");
+        }
+      }
+    });
+  }
+
+  themeCards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const selectedTheme = card.getAttribute("data-theme");
+      if (selectedTheme) {
+        document.documentElement.setAttribute("data-theme", selectedTheme);
+        localStorage.setItem("theme", selectedTheme);
+        updateActiveTheme();
+        if (modal) {
+          modal.close();
+        }
+      }
+    });
+  });
+
+  // Initialize active theme
+  document.addEventListener("DOMContentLoaded", updateActiveTheme);
+
+  // Update theme when storage changes (e.g., from another tab)
+  window.addEventListener("storage", (event) => {
+    if (event.key === "theme") {
+      updateActiveTheme();
+    }
+  });
+</script>
+
+<style>
+  .theme-card {
+    @apply relative border rounded-box overflow-hidden cursor-pointer transition-all duration-200;
+  }
+
+  .theme-card:hover {
+    @apply shadow-lg transform scale-105;
+  }
+
+  .preview {
+    @apply transition-colors duration-200;
+  }
+</style>

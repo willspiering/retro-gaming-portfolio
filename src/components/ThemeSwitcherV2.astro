@@ -115,6 +115,7 @@ const themes = Object.entries(allThemes);
         if (selectedTheme) {
           document.documentElement.setAttribute("data-theme", selectedTheme);
           localStorage.setItem("theme", selectedTheme);
+          document.cookie = `theme=${selectedTheme}; path=/; max-age=31536000`; // Set cookie for 1 year
           updateActiveTheme();
           closeModal();
         }

@@ -1,10 +1,15 @@
 import type { AllThemes } from "../types/theme";
-import { nintendoThemes } from "./nintendo-themes";
+import { techyThemes } from "./techy-themes";
+// import { nintendoThemes } from "./nintendo-themes";
+import { testingThemes } from "./testing-themes";
 
 export const allThemes: AllThemes = {
-  ...nintendoThemes,
+  ...techyThemes,
+  ...testingThemes,
+  // ...nintendoThemes,
 };
 
-console.log("ALL THEMES: ", allThemes);
-
-export { nintendoThemes };
+export {
+  // nintendoThemes,
+  techyThemes,
+};

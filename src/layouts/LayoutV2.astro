@@ -9,7 +9,7 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" data-theme="DarkMatter">
+<html lang="en" data-theme={Astro.cookies.get("theme")?.value || "DarkMatter"}>
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
@@ -112,3 +112,21 @@ const { title } = Astro.props;
     letter-spacing: 1px;
   }
 </style>
+
+<script>
+  function applyTheme() {
+    const theme = localStorage.getItem("theme") || "DarkMatter";
+    document.documentElement.setAttribute("data-theme", theme);
+    document.cookie = `theme=${theme}; path=/; max-age=31536000`;
+  }
+
+  // Apply theme on load
+  applyTheme();
+
+  // Listen for storage events (theme changes in other tabs)
+  window.addEventListener("storage", (event) => {
+    if (event.key === "theme") {
+      applyTheme();
+    }
+  });
+</script>

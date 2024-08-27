@@ -2,23 +2,7 @@
 import { allThemes } from "../themes/index";
 
 const themes = Object.entries(allThemes);
-export interface Props {
-  buttonText?: string;
-}
-
-const { buttonText } = Astro.props;
 ---
-
-{
-  buttonText && (
-    <button
-      class="btn btn-primary theme-switcher-button"
-      onclick="theme_modal.showModal()"
-    >
-      {buttonText}
-    </button>
-  )
-}
 
 <dialog id="theme_modal" class="modal">
   <div class="modal-box w-11/12 max-w-5xl">
@@ -61,7 +45,7 @@ const { buttonText } = Astro.props;
 <script>
   function initializeThemeSwitcher() {
     const themeCards = document.querySelectorAll(".theme-card");
-    let modal = document.getElementById("theme_modal");
+    const modal = document.getElementById("theme_modal");
 
     function updateActiveTheme() {
       const activeTheme =
@@ -104,7 +88,6 @@ const { buttonText } = Astro.props;
     function closeModal() {
       if (modal instanceof HTMLDialogElement) {
         modal.close();
-        toggleModalOpen(false);
       }
     }
 
@@ -120,15 +103,10 @@ const { buttonText } = Astro.props;
       });
     });
 
-    const themeSwitcherButtons = document.querySelectorAll(
-      ".theme-switcher-button"
-    );
-    themeSwitcherButtons.forEach((button) => {
-      button.addEventListener("click", showModal);
-    });
-
     if (modal instanceof HTMLDialogElement) {
-      modal.addEventListener("close", () => toggleModalOpen(false));
+      modal.addEventListener("close", () => {
+        modal.classList.remove("modal-open");
+      });
     }
 
     window.addEventListener("storage", (event) => {
@@ -137,8 +115,7 @@ const { buttonText } = Astro.props;
       }
     });
 
-    // Move modal to body end and update active theme
-    moveModalToBodyEnd();
+    // Update active theme
     updateActiveTheme();
   }
 
@@ -148,4 +125,13 @@ const { buttonText } = Astro.props;
   } else {
     initializeThemeSwitcher();
   }
+
+  // Add a global method to show the modal
+  window.showThemeModal = function () {
+    const modal = document.getElementById("theme_modal");
+    if (modal instanceof HTMLDialogElement) {
+      modal.showModal();
+      modal.classList.add("modal-open");
+    }
+  };
 </script>

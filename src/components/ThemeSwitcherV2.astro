@@ -2,13 +2,23 @@
 import { allThemes } from "../themes/index";
 
 const themes = Object.entries(allThemes);
+export interface Props {
+  buttonText?: string;
+}
+
+const { buttonText } = Astro.props;
 ---
 
-<button
-  id="open-theme-modal"
-  class="btn btn-primary"
-  onclick="theme_modal.showModal()">Change Theme</button
->
+{
+  buttonText && (
+    <button
+      class="btn btn-primary theme-switcher-button"
+      onclick="theme_modal.showModal()"
+    >
+      {buttonText}
+    </button>
+  )
+}
 
 <dialog id="theme_modal" class="modal">
   <div class="modal-box w-11/12 max-w-5xl">
@@ -19,103 +29,123 @@ const themes = Object.entries(allThemes);
     </form>
     <h3 class="font-bold text-lg mb-4">Choose a Theme</h3>
     <div
-      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-h-[60vh] overflow-y-auto p-4"
+      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
     >
       {
         themes.map(([themeName, theme]) => (
-          <button class="theme-card" data-theme={themeName}>
-            <div class="preview border bg-base-200 rounded-box flex flex-col w-full p-2">
-              <div class="flex flex-col gap-2 items-start">
-                <h3 class="font-bold text-sm">{themeName}</h3>
-                <div class="flex flex-wrap gap-1">
-                  <div class="badge badge-primary">primary</div>
-                  <div class="badge badge-secondary">secondary</div>
-                  <div class="badge badge-accent">accent</div>
-                </div>
-              </div>
-              <div class="flex gap-1 mt-2">
-                <button class="btn btn-primary btn-xs">Button</button>
-                <button class="btn btn-ghost btn-xs">Button</button>
+          <button
+            class="theme-card p-2 border-4 border-base-content rounded-lg hover:border-primary focus:border-primary transition-colors duration-200"
+            data-theme={themeName}
+          >
+            <div class="w-full aspect-video bg-base-100 rounded-sm overflow-hidden">
+              <div class="h-1/4 bg-primary" />
+              <div class="p-2">
+                <div class="h-2 w-3/4 bg-secondary mb-1" />
+                <div class="h-2 w-full bg-accent mb-1" />
+                <div class="h-2 w-1/2 bg-neutral" />
               </div>
             </div>
-            <div class="absolute top-0 right-0 mt-1 mr-1 hidden checkmark">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 text-success"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            </div>
+            <span class="block mt-2 text-xs font-semibold truncate">
+              {themeName}
+            </span>
           </button>
         ))
       }
     </div>
   </div>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
 </dialog>
 
 <script>
-  const themeCards = document.querySelectorAll(".theme-card");
-  const modal = document.getElementById("theme_modal") as HTMLDialogElement;
+  function initializeThemeSwitcher() {
+    const themeCards = document.querySelectorAll(".theme-card");
+    let modal = document.getElementById("theme_modal");
 
-  function updateActiveTheme() {
-    const activeTheme =
-      localStorage.getItem("theme") ||
-      document.documentElement.getAttribute("data-theme");
-    themeCards.forEach((card) => {
-      const checkmark = card.querySelector(".checkmark");
-      if (checkmark) {
-        if (card.getAttribute("data-theme") === activeTheme) {
-          checkmark.classList.remove("hidden");
-        } else {
-          checkmark.classList.add("hidden");
+    function updateActiveTheme() {
+      const activeTheme =
+        localStorage.getItem("theme") ||
+        document.documentElement.getAttribute("data-theme");
+      themeCards.forEach((card) => {
+        if (card instanceof HTMLElement) {
+          if (card.getAttribute("data-theme") === activeTheme) {
+            card.classList.add("border-primary");
+          } else {
+            card.classList.remove("border-primary");
+          }
         }
-      }
-    });
-  }
-
-  themeCards.forEach((card) => {
-    card.addEventListener("click", () => {
-      const selectedTheme = card.getAttribute("data-theme");
-      if (selectedTheme) {
-        document.documentElement.setAttribute("data-theme", selectedTheme);
-        localStorage.setItem("theme", selectedTheme);
-        updateActiveTheme();
-        if (modal) {
-          modal.close();
-        }
-      }
-    });
-  });
-
-  // Initialize active theme
-  document.addEventListener("DOMContentLoaded", updateActiveTheme);
-
-  // Update theme when storage changes (e.g., from another tab)
-  window.addEventListener("storage", (event) => {
-    if (event.key === "theme") {
-      updateActiveTheme();
+      });
     }
-  });
+
+    function moveModalToBodyEnd() {
+      if (modal && !document.body.contains(modal)) {
+        document.body.appendChild(modal);
+      }
+    }
+
+    function toggleModalOpen(isOpen) {
+      if (modal) {
+        if (isOpen) {
+          modal.classList.add("modal-open");
+        } else {
+          modal.classList.remove("modal-open");
+        }
+      }
+    }
+
+    function showModal() {
+      if (modal instanceof HTMLDialogElement) {
+        modal.showModal();
+        toggleModalOpen(true);
+      }
+    }
+
+    function closeModal() {
+      if (modal instanceof HTMLDialogElement) {
+        modal.close();
+        toggleModalOpen(false);
+      }
+    }
+
+    themeCards.forEach((card) => {
+      card.addEventListener("click", () => {
+        const selectedTheme = card.getAttribute("data-theme");
+        if (selectedTheme) {
+          document.documentElement.setAttribute("data-theme", selectedTheme);
+          localStorage.setItem("theme", selectedTheme);
+          updateActiveTheme();
+          closeModal();
+        }
+      });
+    });
+
+    const themeSwitcherButtons = document.querySelectorAll(
+      ".theme-switcher-button"
+    );
+    themeSwitcherButtons.forEach((button) => {
+      button.addEventListener("click", showModal);
+    });
+
+    if (modal instanceof HTMLDialogElement) {
+      modal.addEventListener("close", () => toggleModalOpen(false));
+    }
+
+    window.addEventListener("storage", (event) => {
+      if (event.key === "theme") {
+        updateActiveTheme();
+      }
+    });
+
+    // Move modal to body end and update active theme
+    moveModalToBodyEnd();
+    updateActiveTheme();
+  }
+
+  // Run the initialization function when the DOM is fully loaded
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeThemeSwitcher);
+  } else {
+    initializeThemeSwitcher();
+  }
 </script>
-
-<style>
-  .theme-card {
-    @apply relative border rounded-box overflow-hidden cursor-pointer transition-all duration-200;
-  }
-
-  .theme-card:hover {
-    @apply shadow-lg transform scale-105;
-  }
-
-  .preview {
-    @apply transition-colors duration-200;
-  }
-</style>

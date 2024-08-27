@@ -18,7 +18,7 @@ const themes = Object.entries(allThemes);
       {
         themes.map(([themeName, theme]) => (
           <button
-            class="theme-card p-2 border-4 border-base-content rounded-lg hover:border-primary focus:border-primary transition-colors duration-200"
+            class="theme-card p-2 border-4 border-base-content rounded-lg hover:border-primary focus:border-primary transition-colors duration-200 relative"
             data-theme={themeName}
           >
             <div class="w-full aspect-video bg-base-100 rounded-sm overflow-hidden">
@@ -32,6 +32,21 @@ const themes = Object.entries(allThemes);
             <span class="block mt-2 text-xs font-semibold truncate">
               {themeName}
             </span>
+            <div class="absolute bottom-0 right-0 bg-success text-success-content rounded-tl-md p-1 hidden checkmark">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
           </button>
         ))
       }
@@ -53,10 +68,13 @@ const themes = Object.entries(allThemes);
         document.documentElement.getAttribute("data-theme");
       themeCards.forEach((card) => {
         if (card instanceof HTMLElement) {
+          const checkmark = card.querySelector(".checkmark");
           if (card.getAttribute("data-theme") === activeTheme) {
-            card.classList.add("border-primary");
+            card.classList.add("border-success");
+            checkmark?.classList.remove("hidden");
           } else {
-            card.classList.remove("border-primary");
+            card.classList.remove("border-success");
+            checkmark?.classList.add("hidden");
           }
         }
       });
@@ -124,6 +142,13 @@ const themes = Object.entries(allThemes);
     document.addEventListener("DOMContentLoaded", initializeThemeSwitcher);
   } else {
     initializeThemeSwitcher();
+  }
+
+  // Add type declaration for the global method
+  declare global {
+    interface Window {
+      showThemeModal: () => void;
+    }
   }
 
   // Add a global method to show the modal

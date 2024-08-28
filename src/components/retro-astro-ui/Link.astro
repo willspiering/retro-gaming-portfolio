@@ -1,0 +1,26 @@
+---
+export interface Props {
+  href: string;
+  class?: string;
+}
+
+const { href, class: className } = Astro.props;
+---
+
+<a href={href} class:list={['retro-link', className]}>
+  <slot />
+</a>
+
+<style>
+  .retro-link {
+    font-family: 'Press Start 2P', cursive;
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .retro-link:hover, .retro-link:focus {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+  }
+</style>

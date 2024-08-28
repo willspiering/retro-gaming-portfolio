@@ -1,0 +1,23 @@
+---
+export interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<span class:list={['retro-tag', className]}>
+  <slot />
+</span>
+
+<style>
+  .retro-tag {
+    font-family: 'Press Start 2P', cursive;
+    background-color: var(--secondary-color);
+    color: var(--card-bg);
+    padding: 5px 10px;
+    font-size: 0.7em;
+    border-radius: 4px;
+    display: inline-block;
+  }
+</style>

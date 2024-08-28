@@ -1,0 +1,148 @@
+---
+import { allThemes } from "../themes/index";
+
+const themes = Object.entries(allThemes);
+---
+
+<dialog id="theme_modal" class="modal">
+  <div class="modal-box w-11/12 max-w-5xl">
+    <form method="dialog">
+      <button class="btn btn-sm btn-secondary absolute right-2 top-2">✕</button>
+    </form>
+    <h3 class="font-bold text-lg mb-4">Choose a Theme</h3>
+    <div
+      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
+    >
+      {
+        themes.map(([themeName, theme]) => (
+          <button
+            class="theme-card p-2 border-4 border-base-content rounded-lg hover:border-primary focus:border-primary transition-colors duration-200 relative"
+            data-theme={themeName}
+          >
+            <div class="w-full aspect-video bg-base-100 rounded-sm overflow-hidden">
+              <div class="h-1/4 bg-primary" />
+              <div class="p-2">
+                <div class="h-2 w-3/4 bg-secondary mb-1" />
+                <div class="h-2 w-full bg-accent mb-1" />
+                <div class="h-2 w-1/2 bg-neutral" />
+              </div>
+            </div>
+            <span class="block mt-2 text-xs font-semibold truncate">
+              {themeName}
+            </span>
+            <div class="absolute bottom-0 right-0 bg-success text-success-content rounded-tl-md p-1 hidden checkmark">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+          </button>
+        ))
+      }
+    </div>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>
+
+<script>
+  function initializeThemeSwitcher() {
+    const themeCards = document.querySelectorAll(".theme-card");
+    const modal = document.getElementById("theme_modal");
+
+    function updateActiveTheme() {
+      const activeTheme =
+        localStorage.getItem("theme") ||
+        document.documentElement.getAttribute("data-theme");
+      themeCards.forEach((card) => {
+        if (card instanceof HTMLElement) {
+          const checkmark = card.querySelector(".checkmark");
+          if (card.getAttribute("data-theme") === activeTheme) {
+            card.classList.add("border-success");
+            checkmark?.classList.remove("hidden");
+          } else {
+            card.classList.remove("border-success");
+            checkmark?.classList.add("hidden");
+          }
+        }
+      });
+    }
+
+    function toggleModalOpen(isOpen) {
+      if (modal) {
+        if (isOpen) {
+          modal.classList.add("modal-open");
+        } else {
+          modal.classList.remove("modal-open");
+        }
+      }
+    }
+
+    function closeModal() {
+      if (modal instanceof HTMLDialogElement) {
+        modal.close();
+      }
+    }
+
+    themeCards.forEach((card) => {
+      card.addEventListener("click", () => {
+        const selectedTheme = card.getAttribute("data-theme");
+        if (selectedTheme) {
+          document.documentElement.setAttribute("data-theme", selectedTheme);
+          localStorage.setItem("theme", selectedTheme);
+          document.cookie = `theme=${selectedTheme}; path=/; max-age=31536000`; // Set cookie for 1 year
+          updateActiveTheme();
+          closeModal();
+        }
+      });
+    });
+
+    if (modal instanceof HTMLDialogElement) {
+      modal.addEventListener("close", () => {
+        modal.classList.remove("modal-open");
+      });
+    }
+
+    window.addEventListener("storage", (event) => {
+      if (event.key === "theme") {
+        updateActiveTheme();
+      }
+    });
+
+    // Update active theme
+    updateActiveTheme();
+  }
+
+  // Run the initialization function when the DOM is fully loaded
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeThemeSwitcher);
+  } else {
+    initializeThemeSwitcher();
+  }
+
+  // Add type declaration for the global method
+  declare global {
+    interface Window {
+      showThemeModal: () => void;
+    }
+  }
+
+  // Add a global method to show the modal
+  window.showThemeModal = function () {
+    const modal = document.getElementById("theme_modal");
+    if (modal instanceof HTMLDialogElement) {
+      modal.showModal();
+      modal.classList.add("modal-open");
+    }
+  };
+</script>

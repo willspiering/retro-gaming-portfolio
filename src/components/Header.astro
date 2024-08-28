@@ -1,67 +1,58 @@
 ---
-import ThemeSwitcher from './ThemeSwitcher.astro';
+import ThemeSwitcher from "../components/ThemeSwitcher.astro";
+import Navigation from "../components/Navigation.astro";
+import resumeData from "../data/resume-basic.json";
 
-interface Props {
-  name: string;
-  title: string;
-  contact: {
-    linkedin: string;
-    github: string;
-    twitter: string;
-  };
-}
-
-const { name, title, contact } = Astro.props;
+const { name, headline, contact } = resumeData.personal_info;
 ---
-
-<header class="header pixel-border">
-  <h1>{name}</h1>
-  <p class="title">{title}</p>
-  <ThemeSwitcher />
-  <div class="contact-info">
-    <a href={contact.linkedin} target="_blank">LinkedIn</a>
-    <a href={contact.github} target="_blank">GitHub</a>
-    <a href={contact.twitter} target="_blank">Twitter</a>
-  </div>
-</header>
+<div class="sidebar-content">
+    <header>
+        <h1>{name}</h1>
+        <p class="title">{headline}</p>
+        <div class="contact-info">
+            <a href={contact.linkedin} target="_blank">LinkedIn</a>
+            <a href={contact.github} target="_blank">GitHub</a>
+            <a href={contact.twitter} target="_blank">Twitter</a>
+        </div>
+    </header>
+    <Navigation />
+    <div class="sidebar-footer">
+        <ThemeSwitcher />
+    </div>
+</div>
 
 <style>
-  .header {
-    text-align: center;
-    padding: 40px 20px;
-    background-color: var(--header-bg);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .header::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: repeating-linear-gradient(
-      to right,
-      var(--highlight-color),
-      var(--highlight-color) 10px,
-      var(--secondary-color) 10px,
-      var(--secondary-color) 20px
-    );
-  }
-
-  h1 {
-    margin: 0;
-    font-size: 2.5em;
-    color: var(--highlight-color);
-    text-shadow: 2px 2px var(--accent-color);
-  }
-
-  .title {
-    font-family: 'Roboto', sans-serif;
-    margin: 10px 0 0;
-    font-size: 1em;
-    color: var(--secondary-color);
+    .sidebar-content {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        justify-content: center;
+    }
+    
+    header {
+        text-align: center;
+    }
+    
+    h1 {
+        margin: 0;
+        font-size: 2rem;
+        color: var(--highlight-color);
+        text-shadow: 2px 2px var(--accent-color);
+    }
+    
+    .title {
+        font-family: 'Roboto', sans-serif;
+        margin: 10px 0 0;
+        font-size: 1rem;
+        color: var(--secondary-color);
+    }
+    
+    .sidebar-footer {
+        margin-top: auto;
+        display: flex;
+        gap: 20px;
+        justify-content: center;
   }
 
   .contact-info {
@@ -79,7 +70,7 @@ const { name, title, contact } = Astro.props;
     color: var(--card-bg);
     border-radius: 4px;
     transition: background-color 0.3s ease;
-    font-size: 0.7em;
+    font-size: 0.5em;
     text-decoration: none;
   }
 
@@ -94,16 +85,6 @@ const { name, title, contact } = Astro.props;
 
     .title {
       font-size: 0.9em;
-    }
-
-    .contact-info {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .contact-info a {
-      width: 80%;
-      text-align: center;
     }
   }
 </style>

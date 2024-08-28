@@ -1,52 +1,10 @@
----
-import Layout from '../layouts/Layout.astro';
-import GameNavigation from '../components/GameNavigation.astro';
-import Header from '../components/Header.astro';
-import Sidebar from '../components/Sidebar.astro';
-import Summary from '../components/Summary.astro';
-import Experience from '../components/Experience.astro';
-import ProjectShowcase from '../components/ProjectShowcase.astro';
-
-import resumeData from '../data/resume-basic.json';
-
-const {personal_info, experience, education, skills} = resumeData;
----
-
-<Layout title={`${personal_info.name} - UX/UI Developer Portfolio`}>
-  <Header name={personal_info.name} title={personal_info.headline} contact={personal_info.contact} />
-  <GameNavigation/>
-  <div class="container">
-    <div class="top-section">
-      <Sidebar skills={skills} education={education} />
-      <main class="main-content">
-        <Summary summary={personal_info.summary.paragraph} />
-        <Experience experience={experience} />
-      </main>
-    </div>
-    <!-- TODO: add projects={[]} either from json resume or create separately -->
-    <ProjectShowcase/>
-  </div>
-</Layout>
-
-<style>
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .top-section {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 40px; /* Increased from 30px to account for borders */
-    margin-bottom: 40px;
-  }
-
-  @media (max-width: 768px) {
-    .top-section {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>
+<div class="text-center p-8">
+  <h1 class="text-2xl font-bold mb-4">Welcome</h1>
+  <nav class="w-1/4 mx-auto">
+    <ul class="menu bg-base-300 w-full rounded-box">
+      <li><a href="/about-og">OG Retro Resume</a></li>
+      <li><a href="/about-new">Newer Resume</a></li>
+      <li><a href="/v2">V2 NEW SITE</a></li>
+    </ul>
+  </nav>
+</div>

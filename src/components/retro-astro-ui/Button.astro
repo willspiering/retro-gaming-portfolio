@@ -1,0 +1,39 @@
+---
+export interface Props {
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+}
+
+const { href, type = 'button', class: className, ...props } = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag
+  class:list={['retro-button', className]}
+  {...(href ? { href } : { type })}
+  {...props}
+>
+  <slot />
+</Tag>
+
+<style>
+  .retro-button {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8em;
+    padding: 10px 15px;
+    background-color: var(--highlight-color);
+    color: var(--bg-color);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .retro-button:hover, .retro-button:focus {
+    background-color: var(--secondary-color);
+    outline: none;
+  }
+</style>

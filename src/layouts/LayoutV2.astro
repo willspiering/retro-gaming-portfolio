@@ -1,0 +1,136 @@
+---
+import ThemeSwitcherV2 from "../components/ThemeSwitcherV2.astro";
+
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" data-theme={Astro.cookies.get("theme")?.value || "DarkKnight"}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!-- Header for smaller screens -->
+    <header class="lg:hidden bg-base-100 shadow-md z-10">
+      <div class="navbar">
+        <div class="flex-1">
+          <h1 class="text-xl font-bold text-primary">Will Spiering</h1>
+        </div>
+        <div class="flex-none">
+          <button class="btn btn-square btn-ghost">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              class="inline-block w-5 h-5 stroke-current"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"></path></svg
+            >
+          </button>
+        </div>
+      </div>
+      <nav class="hidden">
+        <ul class="menu menu-horizontal px-1">
+          <li><a>Home</a></li>
+          <li><a>About</a></li>
+          <li><a>Projects</a></li>
+          <li><a>Contact</a></li>
+        </ul>
+      </nav>
+      <div class="mt-4">
+        <button class="btn btn-accent" onclick="showThemeModal()"
+          >Choose Theme</button
+        >
+      </div>
+    </header>
+
+    <div class="flex-grow flex flex-col lg:flex-row">
+      <!-- Sidebar for larger screens -->
+      <aside
+        class="hidden lg:flex lg:flex-col lg:w-96 bg-base-200 p-4 h-screen"
+      >
+        <header class="mb-6 text-center">
+          <h1 class="text-2xl font-bold text-primary">Will Spiering</h1>
+          <p class="text-sm text-secondary">UX/UI Developer</p>
+        </header>
+        <nav>
+          <ul class="menu bg-base-100 w-full rounded-box">
+            <li><a href="/v2">Home</a></li>
+            <li><a href="/v2/about">About</a></li>
+            <li><a href="/v2/projects">Projects</a></li>
+            <li><a href="/v2/testing">Testing</a></li>
+          </ul>
+        </nav>
+        <div class="mt-4">
+          <button class="btn btn-accent" onclick="showThemeModal()"
+            >Choose Theme</button
+          >
+        </div>
+      </aside>
+
+      <!-- Main content area -->
+      <main class="flex-grow overflow-y-auto h-[calc(100vh-4rem)] lg:h-screen">
+        <!-- Page content -->
+        <div class="p-4">
+          <div class="container mx-auto px-4 py-8">
+            <!-- Your page content goes here -->
+            <slot />
+          </div>
+        </div>
+      </main>
+    </div>
+    <ThemeSwitcherV2 />
+  </body>
+</html>
+
+<style is:global>
+  body {
+    font-family: "Roboto", sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Press Start 2P", cursive;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+</style>
+
+<script>
+  function applyTheme() {
+    const theme = localStorage.getItem("theme") || "DarkMatter";
+    document.documentElement.setAttribute("data-theme", theme);
+    document.cookie = `theme=${theme}; path=/; max-age=31536000`;
+  }
+
+  // Apply theme on load
+  applyTheme();
+
+  // Listen for storage events (theme changes in other tabs)
+  window.addEventListener("storage", (event) => {
+    if (event.key === "theme") {
+      applyTheme();
+    }
+  });
+</script>

@@ -7,9 +7,7 @@ const themes = Object.entries(allThemes);
 <dialog id="theme_modal" class="modal">
   <div class="modal-box w-11/12 max-w-5xl">
     <form method="dialog">
-      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-        >✕</button
-      >
+      <button class="btn btn-sm btn-secondary absolute right-2 top-2">✕</button>
     </form>
     <h3 class="font-bold text-lg mb-4">Choose a Theme</h3>
     <div
@@ -80,12 +78,6 @@ const themes = Object.entries(allThemes);
       });
     }
 
-    function moveModalToBodyEnd() {
-      if (modal && !document.body.contains(modal)) {
-        document.body.appendChild(modal);
-      }
-    }
-
     function toggleModalOpen(isOpen) {
       if (modal) {
         if (isOpen) {
@@ -93,13 +85,6 @@ const themes = Object.entries(allThemes);
         } else {
           modal.classList.remove("modal-open");
         }
-      }
-    }
-
-    function showModal() {
-      if (modal instanceof HTMLDialogElement) {
-        modal.showModal();
-        toggleModalOpen(true);
       }
     }
 

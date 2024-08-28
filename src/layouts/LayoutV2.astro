@@ -9,7 +9,7 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" data-theme={Astro.cookies.get("theme")?.value || "DarkMatter"}>
+<html lang="en" data-theme={Astro.cookies.get("theme")?.value || "DarkKnight"}>
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
@@ -27,7 +27,7 @@ const { title } = Astro.props;
     <header class="lg:hidden bg-base-100 shadow-md z-10">
       <div class="navbar">
         <div class="flex-1">
-          <h1 class="text-xl font-bold">Will Spiering</h1>
+          <h1 class="text-xl font-bold text-primary">Will Spiering</h1>
         </div>
         <div class="flex-none">
           <button class="btn btn-square btn-ghost">
@@ -54,7 +54,9 @@ const { title } = Astro.props;
         </ul>
       </nav>
       <div class="mt-4">
-        <button class="btn" onclick="showThemeModal()">Choose Theme</button>
+        <button class="btn btn-accent" onclick="showThemeModal()"
+          >Choose Theme</button
+        >
       </div>
     </header>
 
@@ -64,8 +66,8 @@ const { title } = Astro.props;
         class="hidden lg:flex lg:flex-col lg:w-96 bg-base-200 p-4 h-screen"
       >
         <header class="mb-6 text-center">
-          <h1 class="text-2xl font-bold">Will Spiering</h1>
-          <p class="text-sm">UX/UI Developer</p>
+          <h1 class="text-2xl font-bold text-primary">Will Spiering</h1>
+          <p class="text-sm text-secondary">UX/UI Developer</p>
         </header>
         <nav>
           <ul class="menu bg-base-100 w-full rounded-box">
@@ -76,7 +78,9 @@ const { title } = Astro.props;
           </ul>
         </nav>
         <div class="mt-4">
-          <button class="btn" onclick="showThemeModal()">Choose Theme</button>
+          <button class="btn btn-accent" onclick="showThemeModal()"
+            >Choose Theme</button
+          >
         </div>
       </aside>
 

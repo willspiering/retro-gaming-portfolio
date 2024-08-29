@@ -40,7 +40,7 @@ const projects = [
 
 <LayoutV2 title={`${personal_info.name} - ${personal_info.headline}`}>
   <section class="mb-12 text-center">
-    <h1 class="text-4xl font-bold mb-4 text-accent">{personal_info.name}</h1>
+    <h1 class="text-4xl font-bold mb-4 text-primary">{personal_info.name}</h1>
     <h2 class="text-sm mb-2">{personal_info.headline}</h2>
   </section>
 
@@ -78,11 +78,11 @@ const projects = [
           education.map((edu) => (
             <div class="card card-compact border-b-2 border-b-accent border-dashed last:border-0">
               <div class="card-body">
-                <h4 class="card-title text-secondary text-base">
+                <h4 class="card-title text-primary text-base">
                   {edu.degree} in {edu.field}
                 </h4>
-                <h5 class="text-sm font-bold">{edu.school}</h5>
-                <p class="text-sm text-base-content">
+                <h5 class="text-sm text-accent font-bold">{edu.school}</h5>
+                <p class="text-sm text-secondary">
                   {edu.degree} | {edu.start_date} - {edu.end_date}
                 </p>
               </div>
@@ -101,7 +101,7 @@ const projects = [
           experience.map((job, index) => (
             <div class="card card-compact border-b-2 border-b-accent border-dashed last:border-0">
               <div class="card-body prose max-w-none">
-                <h4 class="card-title text-secondary">{job.job_title}</h4>
+                <h4 class="card-title text-primary">{job.job_title}</h4>
                 <h5 class="text-lg text-accent">{job.company}</h5>
                 <div class="text-sm text-secondary text-opacity-70">
                   {job.location} | {job.start_date} - {job.end_date}
@@ -128,50 +128,6 @@ const projects = [
         >
           {
             projects.map((project) => (
-              <div class="card card-compact bg-base-100 shadow-xl">
-                <figure>
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                    alt="Shoes"
-                  />
-                </figure>
-                <div class="card-body">
-                  <h4 class="card-title text-secondary text-lg">
-                    {project.title}
-                  </h4>
-                  <p>{project.description}</p>
-                  <div class="card-actions justify-end">
-                    <a href="#" class="btn btn-primary">
-                      View Project
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              // NEUTRAL CARD
-              // <div class="card bg-neutral shadow-xl">
-              //   <figure>
-              //     <img
-              //       src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-              //       alt="Shoes"
-              //     />
-              //   </figure>
-              //   <div class="card-body">
-              //     <h4 class="card-title text-neutral-content text-lg">
-              //       {project.title}
-              //     </h4>
-              //     <p>{project.description}</p>
-              //     <div class="card-actions justify-end">
-              //       <a href="#" class="btn btn-primary">
-              //         View Project
-              //       </a>
-              //     </div>
-              //   </div>
-              // </div>
-            ))
-          }
-          {
-            projects.map((project) => (
               <div class="card bg-base-200 shadow-xl">
                 <figure>
                   <img
@@ -180,62 +136,12 @@ const projects = [
                   />
                 </figure>
                 <div class="card-body">
-                  <h4 class="card-title text-neutral-content text-lg">
+                  <h4 class="card-title text-accent text-lg">
                     {project.title}
                   </h4>
                   <p>{project.description}</p>
                   <div class="card-actions justify-end">
                     <a href="#" class="btn btn-primary">
-                      View Project
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))
-          }
-
-          {
-            projects.map((project) => (
-              // Primary CARD
-              <div class="card bg-primary shadow-xl">
-                <figure>
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                    alt="Shoes"
-                  />
-                </figure>
-                <div class="card-body">
-                  <h4 class="card-title text-primary-content text-lg">
-                    {project.title}
-                  </h4>
-                  <p class="text-primary-content">{project.description}</p>
-                  <div class="card-actions justify-end">
-                    <a href="#" class="btn">
-                      View Project
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))
-          }
-
-          {
-            projects.map((project) => (
-              // Secondary CARD
-              <div class="card bg-secondary shadow-xl">
-                <figure>
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                    alt="Shoes"
-                  />
-                </figure>
-                <div class="card-body">
-                  <h4 class="card-title text-secondary-content text-lg">
-                    {project.title}
-                  </h4>
-                  <p class="text-secondary-content">{project.description}</p>
-                  <div class="card-actions justify-end">
-                    <a href="#" class="btn">
                       View Project
                     </a>
                   </div>
